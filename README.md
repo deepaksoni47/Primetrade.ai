@@ -1,10 +1,10 @@
 # ⚡ PrimeTrade.ai - Scalable REST API & Interactive Dashboard
 
-[![FastAPI](https://img.shields.shields.shields.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com)
-[![Postgres](https://img.shields.shields.shields.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org)
-[![Redis](https://img.shields.shields.shields.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)](https://redis.io)
-[![Docker](https://img.shields.shields.shields.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com)
-[![JWT](https://img.shields.shields.shields.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)](https://jwt.io)
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com)
+[![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org)
+[![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)](https://redis.io)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com)
+[![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)](https://jwt.io)
 
 An industry-grade, highly scalable backend ecosystem designed for the **Primetrade.ai Hiring Assignment**. The application features a robust FastAPI REST backend, a relational PostgreSQL database, Redis-backed rate limiting and high-speed caching, strict JWT-based session handling, a self-healing database schema, and an ultra-clean Charcoal/Midnight-Slate interactive frontend dashboard to demonstrate all system capabilities without needing external clients.
 
