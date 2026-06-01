@@ -1,15 +1,18 @@
 :root {
-  color-scheme: light;
-  --bg: #f4efe6;
-  --bg-accent: #e7f0eb;
-  --panel: rgba(255, 255, 255, 0.82);
-  --border: rgba(17, 24, 39, 0.12);
+  /* Color palette (clean, dashboard-friendly) */
+  --bg: #ffffff;
+  --bg-accent: #f8fafc;
+  --panel: #ffffff;
+  --border: #e2e8f0;
   --text: #0f172a;
-  --muted: #5b6477;
-  --primary: #0f766e;
-  --primary-strong: #115e59;
-  --danger: #b45309;
-  --shadow: 0 24px 80px rgba(15, 23, 42, 0.12);
+  --muted: #64748b;
+  --primary: #2563eb;
+  --primary-strong: #1d4ed8;
+  --success: #16a34a;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --shadow-sm: 0 6px 18px rgba(2, 6, 23, 0.06);
+  --radius: 10px;
 }
 
 * {
@@ -19,26 +22,22 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial;
   color: var(--text);
-  background:
-    radial-gradient(
-      circle at top left,
-      rgba(15, 118, 110, 0.14),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at top right,
-      rgba(180, 83, 9, 0.14),
-      transparent 26%
-    ),
-    linear-gradient(180deg, var(--bg), var(--bg-accent));
+  background: linear-gradient(180deg, var(--bg), var(--bg-accent));
 }
 
 .shell {
   width: min(1200px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 32px 0 48px;
+  padding: 36px 0 56px;
 }
 
 .hero {
@@ -79,13 +78,12 @@ h1 {
 .hero-card,
 .panel {
   background: var(--panel);
-  backdrop-filter: blur(18px);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius);
 }
 
 .hero-card {
-  border-radius: 24px;
   padding: 20px;
   display: grid;
   gap: 12px;
@@ -128,7 +126,7 @@ h1 {
 .ghost,
 input,
 select {
-  border-radius: 14px;
+  border-radius: calc(var(--radius) - 2px);
   border: 1px solid var(--border);
   font: inherit;
 }
@@ -143,7 +141,7 @@ select {
 
 .tab.active,
 .primary {
-  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+  background: linear-gradient(180deg, var(--primary), var(--primary-strong));
   color: white;
   border-color: transparent;
 }
@@ -229,8 +227,8 @@ button:hover {
 
 .item {
   border: 1px solid var(--border);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.65);
+  border-radius: calc(var(--radius) - 2px);
+  background: var(--panel);
   padding: 14px;
   display: grid;
   gap: 10px;
@@ -253,6 +251,91 @@ button:hover {
 }
 .hidden {
   display: none;
+}
+
+/* Skeleton loader */
+.skeleton {
+  background: linear-gradient(90deg, #f0f3f5 0%, #e9eef3 50%, #f0f3f5 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s linear infinite;
+  border-radius: 8px;
+}
+.skeleton.text {
+  height: 14px;
+  width: 60%;
+}
+.skeleton.row {
+  height: 12px;
+  width: 100%;
+  margin-bottom: 8px;
+}
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* Toasts */
+#toast-root {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1200;
+}
+.toast {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  margin-top: 10px;
+  box-shadow: var(--shadow-sm);
+  border-radius: 8px;
+  min-width: 220px;
+}
+.toast.success {
+  border-left: 4px solid var(--success);
+}
+.toast.error {
+  border-left: 4px solid var(--danger);
+}
+.toast.warning {
+  border-left: 4px solid var(--warning);
+}
+
+/* Modal */
+#modal-root {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1300;
+  pointer-events: auto;
+}
+.modal {
+  background: var(--panel);
+  padding: 20px;
+  border-radius: 10px;
+  width: min(540px, 96%);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+.modal .actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
 }
 
 @media (max-width: 960px) {

@@ -258,7 +258,8 @@ function bindTaskActions() {
   document.querySelectorAll(".delete-task").forEach((button) => {
     button.addEventListener("click", async (event) => {
       const taskId = event.target.closest("[data-task-id]").dataset.taskId;
-      if (!window.confirm("Delete this task?")) return;
+      const ok = await confirmDialog("Delete this task?");
+      if (!ok) return;
       const response = await apiFetch(`/tasks/${taskId}`, { method: "DELETE" });
       if (response.ok) {
         await loadTasks();
@@ -336,9 +337,71 @@ elements.fullName.parentElement.style.display = "none";
 
 bootstrapSession().then(async () => {
   if (getAccessToken()) {
-    await loadTasks();
+    elements.tasksList.innerHTML = `<div class="item"><strong>Log in to manage tasks.</strong></div>`;
     if (currentUser?.role === "admin") {
       await loadUsers();
+
+      // show skeletons while loading
+      elements.tasksList.innerHTML = Array.from({ length: 3 })
+        .map(
+          () => `
+        <div class="item">
+          <div class="skeleton text"></div>
+          <div class="skeleton row"></div>
+        </div>
+      `,
+        )
+        .join("");
+      /* ----- Toast utility ----- */
+      function showToast(message, type = "") {
+        const root = document.getElementById("toast-root");
+        if (!root) return;
+        const el = document.createElement("div");
+        el.className = `toast ${type}`.trim();
+        el.textContent = message;
+        root.appendChild(el);
+        setTimeout(() => {
+          el.style.opacity = "0";
+          setTimeout(() => el.remove(), 300);
+        }, 3500);
+      }
+
+      /* ----- Confirm dialog utility (returns Promise<boolean>) ----- */
+      function confirmDialog(message) {
+        return new Promise((resolve) => {
+          const root = document.getElementById("modal-root");
+          if (!root) return resolve(window.confirm(message));
+
+          const overlay = document.createElement("div");
+          overlay.className = "modal-overlay";
+          overlay.innerHTML = `
+          <div class="modal" role="dialog" aria-modal="true">
+            <div class="modal-body"><p>${message}</p></div>
+            <div class="actions">
+              <button class="ghost cancel">Cancel</button>
+              <button class="primary confirm">Delete</button>
+            </div>
+          </div>
+        `;
+
+          root.appendChild(overlay);
+
+          const cleanup = (result) => {
+            overlay.remove();
+            resolve(result);
+          };
+
+          overlay
+            .querySelector(".cancel")
+            .addEventListener("click", () => cleanup(false));
+          overlay
+            .querySelector(".confirm")
+            .addEventListener("click", () => cleanup(true));
+        });
+      }
+
+      // show toast on certain global events (optional)
+      window.showToast = showToast;
     }
   }
 });
