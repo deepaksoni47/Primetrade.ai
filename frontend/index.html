@@ -13,12 +13,11 @@
     <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body class="logged-out">
-    
     <!-- Auth View (Only shown when logged out) -->
     <main class="auth-view">
       <div class="auth-card-container">
         <header class="auth-header">
-          <p class="eyebrow">FastAPI + PostgreSQL + JWT</p>
+          <!-- <p class="eyebrow">FastAPI + PostgreSQL + JWT</p> -->
           <h1>PrimeTrade</h1>
           <p class="lede">
             Sign in or register to manage tasks with complete security.
@@ -41,13 +40,13 @@
               <input
                 id="email"
                 type="email"
-                placeholder="admin@example.com"
+                placeholder="deepak@example.com"
                 required
               />
             </label>
             <label class="field">
               <span>Full name</span>
-              <input id="fullName" type="text" placeholder="Jane Doe" />
+              <input id="fullName" type="text" placeholder="Deepak Soni" />
             </label>
             <label class="field">
               <span>Password</span>
@@ -74,17 +73,33 @@
           <h1>PrimeTrade</h1>
           <span class="badge badge-api">v1</span>
         </div>
-        
+
         <div class="session-info">
           <div class="session-user">
             <h2 id="welcomeTitle">Loading...</h2>
             <div class="session-meta">
               <span id="roleBadge" class="role-badge">guest</span>
-              <span id="tokenState" class="token-state muted">Authenticating...</span>
+              <span id="tokenState" class="token-state muted"
+                >Authenticating...</span
+              >
             </div>
           </div>
           <button id="logoutBtn" class="logout-btn" type="button">
-            <svg class="logout-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            <svg
+              class="logout-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
             Log out
           </button>
         </div>
@@ -108,7 +123,7 @@
                   required
                 />
               </label>
-              
+
               <label class="field">
                 <span>Short description</span>
                 <textarea
@@ -126,7 +141,7 @@
                   <option value="completed">Completed</option>
                 </select>
               </label>
-              
+
               <button class="primary" type="submit">Add Task</button>
             </form>
           </article>
@@ -136,22 +151,49 @@
         <article class="panel main-column">
           <div class="panel-header-simple inline-head">
             <h3>Tasks</h3>
-            <button id="refreshTasks" class="ghost-btn refresh-btn" type="button">
-              <svg class="refresh-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            <button
+              id="refreshTasks"
+              class="ghost-btn refresh-btn"
+              type="button"
+            >
+              <svg
+                class="refresh-icon"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"
+                />
+              </svg>
               Refresh
             </button>
           </div>
-          
+
           <div class="filters-row">
             <div class="search-box">
-              <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <svg
+                class="search-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
               <input
                 id="searchInput"
                 type="search"
                 placeholder="Search tasks..."
               />
             </div>
-            
+
             <div class="select-box">
               <select id="statusFilter">
                 <option value="">All Statuses</option>
@@ -171,7 +213,11 @@
         <article class="panel">
           <div class="panel-header-simple admin-head">
             <h3>Admin Users List</h3>
-            <button id="loadUsersBtn" class="ghost-btn load-users-btn" type="button">
+            <button
+              id="loadUsersBtn"
+              class="ghost-btn load-users-btn"
+              type="button"
+            >
               Load users
             </button>
           </div>
