@@ -56,18 +56,18 @@ graph TD
     style PricingAPI fill:#272015,stroke:#d97706,stroke-width:2px,color:#fff
 ```
 
----
-
 ## 🌐 Project Access Endpoints
 
-Once the application is started locally or inside Docker, you can access the following core endpoints:
+### 🚀 Live Production Deployment (24/7 Awake)
+* 🖥️ **Live Web Application**: [https://primetrade-ai-k6os.onrender.com/](https://primetrade-ai-k6os.onrender.com/) *(Served dynamically from Render)*
+* 📘 **Live Swagger UI API Docs**: [https://primetrade-ai-k6os.onrender.com/docs](https://primetrade-ai-k6os.onrender.com/docs)
+* 📕 **Live ReDoc Alternative Docs**: [https://primetrade-ai-k6os.onrender.com/redoc](https://primetrade-ai-k6os.onrender.com/redoc)
 
-* 🖥️ **Interactive Frontend Dashboard**: [http://localhost:8000/](http://localhost:8000/) *(Served statically from the backend!)*
-* 📘 **Swagger UI API Reference Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
-* 📕 **ReDoc Alternative API Docs**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
-* 💚 **API Health Check Endpoint**: [http://localhost:8000/health](http://localhost:8000/health)
-
----
+### 💻 Local Dev / Docker Environment
+* 🖥️ **Local Dashboard UI**: [http://localhost:8000/](http://localhost:8000/) *(Served statically from the backend)*
+* 📘 **Local Swagger UI API Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
+* 📕 **Local ReDoc Alternative Docs**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
+* 💚 **API Health Check**: [http://localhost:8000/health](http://localhost:8000/health)
 
 ## 🚀 Quick Start Guide (Docker Compose)
 
