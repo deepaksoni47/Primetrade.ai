@@ -13,7 +13,7 @@ class AuditLog(Base):
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid4()))
     actor_user_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
     actor_role: Mapped[str | None] = mapped_column(String(20), nullable=True)
-    action: Mapped[str] = mapped_column(String(50), nullable=False)
+    action: Mapped[str] = mapped_column(String(255), nullable=False)
     resource: Mapped[str] = mapped_column(String(255), nullable=False)
     resource_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
     status_code: Mapped[int] = mapped_column(nullable=False)

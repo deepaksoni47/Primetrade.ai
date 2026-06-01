@@ -7,7 +7,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from sqlalchemy import select
+from sqlalchemy import select, text
 
 from app.api.routes.external import router as external_router
 from app.api.routes.admin import router as admin_router
@@ -123,6 +123,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def startup() -> None:
         if resolved_settings.auto_create_schema:
             Base.metadata.create_all(bind=engine)
+            try:
+                with session_factory() as session:
+                    session.execute(text("ALTER TABLE audit_logs ALTER COLUMN action TYPE VARCHAR(255);"))
+                    session.commit()
+            except Exception as e:
+                logger.warning("Failed to alter audit_logs table: %s", e)
             with session_factory() as session:
                 seed_admin_user(session, resolved_settings)
 
@@ -155,7 +161,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                     AuditLog(
                         actor_user_id=actor_user_id,
                         actor_role=actor_role,
-                        action=f"{request.method} {request.url.path}",
+                        action=f"{request.method} {request.url.path}"[:255],
                         resource=request.url.path,
                         resource_id=resource_identifier(request.url.path),
                         status_code=response.status_code,
