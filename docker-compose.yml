@@ -1,0 +1,53 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: primetrade
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d primetrade"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@db:5432/primetrade
+      REDIS_URL: redis://redis:6379/0
+      SECRET_KEY: change-this-secret
+      ACCESS_TOKEN_EXPIRE_MINUTES: 15
+      REFRESH_TOKEN_EXPIRE_DAYS: 7
+      SECURE_REFRESH_COOKIE: "false"
+      AUTO_CREATE_SCHEMA: "true"
+      SEED_ADMIN_EMAIL: admin@example.com
+      SEED_ADMIN_PASSWORD: Admin12345!
+      RATE_LIMIT_REQUESTS_PER_MINUTE: 60
+      CACHE_TTL_SECONDS: 30
+      EXTERNAL_API_TIMEOUT_SECONDS: 3.0
+      EXTERNAL_API_RETRY_ATTEMPTS: 3
+    ports:
+      - "8000:8000"
+
+volumes:
+  pgdata:

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PrimeTrade API Demo</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">FastAPI + PostgreSQL + JWT</p>
+          <h1>PrimeTrade API Demo</h1>
+          <p class="lede">
+            Register, log in, manage tasks, and test role-based access from one
+            small dashboard.
+          </p>
+        </div>
+        <div class="hero-card">
+          <div><span>API</span><strong>v1</strong></div>
+          <div><span>Auth</span><strong>JWT + Refresh Cookie</strong></div>
+          <div><span>Docs</span><strong>/docs</strong></div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="panel auth-panel">
+          <div class="tabs">
+            <button id="showLogin" class="tab active" type="button">
+              Log in
+            </button>
+            <button id="showRegister" class="tab" type="button">
+              Register
+            </button>
+          </div>
+
+          <form id="authForm" class="form">
+            <label class="field">
+              <span>Email</span>
+              <input
+                id="email"
+                type="email"
+                placeholder="admin@example.com"
+                required
+              />
+            </label>
+            <label class="field">
+              <span>Full name</span>
+              <input id="fullName" type="text" placeholder="Jane Doe" />
+            </label>
+            <label class="field">
+              <span>Password</span>
+              <input
+                id="password"
+                type="password"
+                placeholder="••••••••"
+                required
+              />
+            </label>
+            <button class="primary" type="submit">Continue</button>
+          </form>
+
+          <div id="authMessage" class="message"></div>
+        </article>
+
+        <article class="panel dashboard-panel">
+          <div class="panel-header">
+            <div>
+              <p class="section-label">Session</p>
+              <h2 id="welcomeTitle">Not signed in</h2>
+            </div>
+            <button id="logoutBtn" class="ghost" type="button">Log out</button>
+          </div>
+
+          <div class="status-row">
+            <span id="roleBadge" class="badge">guest</span>
+            <span id="tokenState" class="muted">No access token loaded</span>
+          </div>
+
+          <section class="section-block">
+            <div class="section-head">
+              <h3>Create Task</h3>
+            </div>
+            <form id="taskForm" class="task-form">
+              <input
+                id="taskTitle"
+                type="text"
+                placeholder="Task title"
+                required
+              />
+              <input
+                id="taskDescription"
+                type="text"
+                placeholder="Short description"
+              />
+              <select id="taskStatus">
+                <option value="pending">Pending</option>
+                <option value="in_progress">In progress</option>
+                <option value="completed">Completed</option>
+              </select>
+              <button class="primary" type="submit">Add</button>
+            </form>
+          </section>
+
+          <section class="section-block">
+            <div class="section-head">
+              <h3>Tasks</h3>
+              <div class="filters">
+                <input
+                  id="searchInput"
+                  type="search"
+                  placeholder="Search tasks"
+                />
+                <select id="statusFilter">
+                  <option value="">All</option>
+                  <option value="pending">Pending</option>
+                  <option value="in_progress">In progress</option>
+                  <option value="completed">Completed</option>
+                </select>
+                <button id="refreshTasks" class="ghost" type="button">
+                  Refresh
+                </button>
+              </div>
+            </div>
+            <div id="tasksList" class="list"></div>
+          </section>
+
+          <section id="adminSection" class="section-block hidden">
+            <div class="section-head">
+              <h3>Admin Users</h3>
+              <button id="loadUsersBtn" class="ghost" type="button">
+                Load users
+              </button>
+            </div>
+            <div id="usersList" class="list"></div>
+          </section>
+        </article>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
